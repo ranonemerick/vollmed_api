@@ -22,6 +22,7 @@ public class MedicoController {
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
+
         repository.save(new Medico(dados));
     }
 
@@ -33,6 +34,8 @@ public class MedicoController {
     @PutMapping
     @Transactional
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformaçoes(dados);
     }
 
 }
